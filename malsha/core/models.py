@@ -39,7 +39,6 @@ class Incident(models.Model):
 
     author = models.ForeignKey(AUTH_USER_MODEL)
     name = models.CharField(max_length=30, null=True, blank=True)
-    #last_name = models.CharField(max_length=30)
     tlp = models.CharField(max_length=1, choices=TLP_CHOICES, default=1)
     attack = models.CharField(max_length=1, choices=ATTACK_CHOICES)
     tags = models.ManyToManyField(Tag, blank=True)
@@ -58,8 +57,6 @@ class Indicator(models.Model):
         ('9', 'free text'),
         )
 
-    incident = models.ForeignKey(Incident)
+    incident = models.ForeignKey(Incident, related_name='indicators')
     indicator_type = models.CharField(max_length=2, choices=INDICATOR_CHOICES)
     value = models.CharField(max_length=2048)
-    
-
